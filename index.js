@@ -163,16 +163,25 @@ function getCountryWins(data, team_initials) {
     
 // Just do the math to see if they won, and increment a counter(?)
     let teamWins = 0
-    for (let i = 0; i < teamGames.length; i++) {
-        if (teamGames[i]["Home Team Initials"] == team_initials && teamGames[i]["Home Team Goals"] > teamGames[i]["Away Team Goals"]) {
+
+    teamGames.forEach(element => {
+        if(element['Home Team Initials'] === team_initials && element['Home Team Goals'] > element['Away Team Goals'])
             teamWins++
-        } else if (teamGames[i]["Away Team Initials"] == team_initials && teamGames[i]["Away Team Goals"] > teamGames[i]["Home Team Goals"]){
+        else if (element['Away Team Initials'] === team_initials && element['Away Team Goals'] > element['Home Team Goals'])
             teamWins++
-        }
-    }
+    });
+    return teamWins
+
+    // for (let i = 0; i < teamGames.length; i++) {
+    //     if (teamGames[i]["Home Team Initials"] == team_initials && teamGames[i]["Home Team Goals"] > teamGames[i]["Away Team Goals"]) {
+    //         teamWins++
+    //     } else if (teamGames[i]["Away Team Initials"] == team_initials && teamGames[i]["Away Team Goals"] > teamGames[i]["Home Team Goals"]){
+    //         teamWins++
+    //     }
+    // }
     // return teamGames
 // Burp out counter
-    return teamWins
+    // return teamWins
 }
 
 console.log('STRETCH #1: ', getCountryWins(fifaData, "BRA"))
